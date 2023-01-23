@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  web_app:
+    container_name: "web_app"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    entrypoint: >
+      sh -c "
+        echo "Starting..."
+        alembic upgrade head
+        uvicorn main:app --host 0.0.0.0 --reload
+      "
+    volumes:
+      - ./src:/app/src/
+    networks:
+      - web_network
+    ports:
+      - "8000:8000"
+    depends_on:
+      web_database:
+        condition: service_healthy
+
+  web_database:
+    container_name: "pg-db"
+    image: postgres:15.1-alpine
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    networks:
+      - web_network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres"]
+      interval: 5s
+      timeout: 20s
+      retries: 100
+
+
+networks:
+  web_network:
+    name: web_network
