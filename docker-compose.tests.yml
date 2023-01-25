@@ -11,7 +11,7 @@ services:
     entrypoint: >
       sh -c "
         echo "Starting..."
-        pytest
+        pytest -v
       "
     networks:
       - test_network

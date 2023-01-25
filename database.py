@@ -5,6 +5,7 @@ from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 load_dotenv()
 
+
 POSTGRES_USER = os.getenv('POSTGRES_USER')
 POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
 HOST_DB = os.getenv('HOST_DB')

@@ -28,6 +28,8 @@ def create_menu(db: Session, menu: MenuCreate):
 
 def update_menu(db: Session, menu: MenuUpdate, api_test_menu_id: str):
     updated_menu = get_menu(db=db, api_test_menu_id=api_test_menu_id)
+    if updated_menu is None:
+        return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={'detail': 'menu not found'})
     updated_menu.title = menu.title
     updated_menu.description = menu.description
     db.commit()
@@ -37,6 +39,8 @@ def update_menu(db: Session, menu: MenuUpdate, api_test_menu_id: str):
 
 def delete_menu(db: Session, api_test_menu_id: str):
     menu = get_menu(db=db, api_test_menu_id=api_test_menu_id)
+    if menu is None:
+        return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={'detail': 'menu not found'})
     db.delete(menu)
     db.commit()
 
@@ -67,6 +71,8 @@ def create_submenu(db: Session, submenu: SubMenuCreate, api_test_menu_id: str):
 
 def update_submenu(db: Session, submenu: SubMenuUpdate, api_test_submenu_id: str):
     updated_submenu = get_submenu(db=db, api_test_submenu_id=api_test_submenu_id)
+    if updated_submenu is None:
+        return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={'detail': 'submenu not found'})
     updated_submenu.title = submenu.title
     updated_submenu.description = submenu.description
     db.commit()
@@ -76,6 +82,8 @@ def update_submenu(db: Session, submenu: SubMenuUpdate, api_test_submenu_id: str
 
 def delete_submenu(db: Session, api_test_submenu_id: str):
     submenu = get_submenu(db=db, api_test_submenu_id=api_test_submenu_id)
+    if submenu is None:
+        return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={'detail': 'submenu not found'})
     db.delete(submenu)
     db.commit()
 
@@ -106,6 +114,8 @@ def create_dish(db: Session, dish: DishCreate, api_test_submenu_id: str):
 
 def update_dish(db: Session, dish: DishUpdate, api_test_dish_id: str):
     updated_dish = get_dish(db=db, api_test_dish_id=api_test_dish_id)
+    if updated_dish is None:
+        return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={'detail': 'dish not found'})
     updated_dish.title = dish.title
     updated_dish.description = dish.description
     updated_dish.price = dish.price
@@ -116,5 +126,7 @@ def update_dish(db: Session, dish: DishUpdate, api_test_dish_id: str):
 
 def delete_dish(db: Session, api_test_dish_id: str):
     dish = get_dish(db=db, api_test_dish_id=api_test_dish_id)
+    if dish is None:
+        return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={'detail': 'dish not found'})
     db.delete(dish)
     db.commit()

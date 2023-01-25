@@ -5,11 +5,9 @@ from sqlalchemy import pool
 
 from alembic import context
 
-
-
 sys.path = ['', '..'] + sys.path[1:]
 
-from src.database import SQLALCHEMY_DATABASE_URL
+#from src.database import SQLALCHEMY_DATABASE_URL
 from src.base import Base
 
 # this is the Alembic Config object, which provides

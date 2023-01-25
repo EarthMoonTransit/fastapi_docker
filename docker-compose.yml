@@ -15,7 +15,7 @@ services:
         uvicorn main:app --host 0.0.0.0 --reload
       "
     volumes:
-      - ./src:/app/src/
+      - .:/app
     networks:
       - web_network
     ports:
