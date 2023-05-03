@@ -2,7 +2,7 @@
 Склонируйте репозиторий:
 
 ```
-https://github.com/Sardelina/fastapi_docker.git 
+https://github.com/EarthMoonTransit/fastapi_docker.git 
 ```
 Cоздайте виртуальное окружение:
 ```
